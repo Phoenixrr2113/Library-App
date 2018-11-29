@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  connect
+} from 'react-redux';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
 
@@ -65,25 +68,34 @@ const SidenavItems = () => {
     </div>
   );
 
-  const showItems = () =>
-    // user.login
-    //   ? items.map((item, i) => {
-    //       if (user.login.isAuth) {
-    //         return !item.exclude ? element(item, i) : null;
-    //       } else {
-    //         return !item.restricted ? element(item, i) : null;
-    //       }
-    //     })
-    //   : null;
-    items.map((item, i) => {
-      return element(item, i);
-    });
+  
+    const showItems = () => (
+        user.login ?
+            items.map((item,i)=>{
+                if(user.login.isAuth) {
+                    return !item.exclude ?
+                        element(item,i)
+                    :null
+                } else {
+                    return !item.restricted ?
+                        element(item,i)
+                    :null
+                }
+            })
+        :null
+    )
 
-  return (
-    <div>
-      <div>{showItems()}</div>;
-    </div>
-  );
+    return (
+        <div>
+            {showItems()}
+        </div>
+    );
 };
 
-export default SidenavItems;
+function mapStateToProps({ user }){
+    return{
+        user
+    }
+}
+
+export default connect(mapStateToProps)(SidenavItems)

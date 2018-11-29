@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Nav from './SideNav/sideNav';
 
 class Header extends Component {
+
   state = {
     showNav: false,
   };
@@ -11,6 +12,7 @@ class Header extends Component {
   onHideNav = () => {
     this.setState({ showNav: false });
   };
+  
   render() {
     return (
       <header>

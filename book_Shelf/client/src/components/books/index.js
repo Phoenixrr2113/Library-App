@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getBookWithReviewer } from '../../actions';
+import {
+  getBookWithReviewer,
+  clearBookWithReviewer
+} from '../../actions';
+
+
+
 class BookView extends Component {
   componentWillMount() {
     this.props.dispatch(getBookWithReviewer(this.props.match.params.id));
   }
 
-  // componentWillUnmount() {
-  //   this.props.dispatch(clearBookWithReviewer());
-  // }
+  componentWillUnmount() {
+    this.props.dispatch(clearBookWithReviewer());
+  }
 
   renderBook = books =>
     books.book ? (
